@@ -33,7 +33,6 @@ export default function SceneBackground() {
     });
     const fade = gsap.to(wrap.current, {
       opacity: 0.4,
-      scale: 1.08,
       ease: "none",
       scrollTrigger: { trigger: "#inicio", start: "top top", end: "bottom top", scrub: 0.8 },
     });
