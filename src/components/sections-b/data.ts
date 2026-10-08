@@ -18,8 +18,8 @@ export const contact: {
   email: "danieli.drum@outlook.com",
   instagramHandle: "@danieli.drum",
   oab: "OAB/MS 24680",
-  addressLines: ["Rua Dr. França Simões, 1541 · Centro", "Glória de Dourados/MS · CEP 79730-007"],
-  mapQuery: "Rua Dr. França Simões, 1541 - Centro, Glória de Dourados - MS, 79730-007",
+  addressLines: ["Rua Origens França Simões, 1541 · Centro", "Glória de Dourados/MS · CEP 79730-007"],
+  mapQuery: "Rua Origens França Simões, 1541 - Centro, Glória de Dourados - MS, 79730-007",
 };
 
 const whatsappMessage = "Olá, Dra. Danieli. Gostaria de agendar um atendimento.";
