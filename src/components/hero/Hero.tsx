@@ -8,7 +8,7 @@ import { messages, whatsappLink } from "@/content/site";
 // Logo oficial (arquivo pronto da identidade visual). Nunca redesenhar, esticar ou recolorir.
 const LOGO_SRC = "/brand/logo-vertical-transparente.png";
 
-// Número do WhatsApp vem de src/content/site.ts (ainda marcado como pendente lá).
+// Número do WhatsApp vem de src/content/site.ts.
 const WHATSAPP_URL = whatsappLink(messages.schedule);
 
 // Paleta da identidade visual.

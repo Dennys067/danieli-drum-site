@@ -7,8 +7,7 @@ export const site = {
   name: "Danieli Drum",
   tagline: "Advocacia e Consultoria Jurídica",
   areas: "Direito Previdenciário e Direito Cível",
-  // [PENDENTE] somente dígitos, com 55 + DDD
-  whatsapp: "5500000000000",
+  whatsapp: "556799549879",
   // [PENDENTE] domínio definitivo
   url: "https://www.danielidrum.adv.br",
 };

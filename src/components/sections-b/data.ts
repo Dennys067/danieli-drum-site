@@ -13,8 +13,8 @@ export const contact: {
   addressLines: string[] | null;
   mapQuery: string | null; // endereço usado na busca do mapa
 } = {
-  whatsappNumber: null, // PENDENTE
-  whatsappDisplay: null, // PENDENTE
+  whatsappNumber: "556799549879",
+  whatsappDisplay: "(67) 9954-9879",
   email: "danieli.drum@outlook.com",
   instagramHandle: "@danieli.drum",
   oab: "OAB/MS 24680",
