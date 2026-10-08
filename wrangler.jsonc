@@ -1,6 +1,6 @@
 {
   // Usado só se o deploy for feito como Worker (Workers Builds). No Cloudflare Pages basta a pasta /out.
-  "name": "danieli-drum-site",
+  "name": "danieli-drum",
   "compatibility_date": "2026-09-01",
   "assets": { "directory": "./out" }
 }
