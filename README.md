@@ -23,6 +23,5 @@ npm run build    # site estático em /out (Cloudflare Pages: comando npm run bui
 
 ## Dados pendentes
 
-Procure por `PENDENTE` no código: número da OAB, WhatsApp, e-mail, endereço, Instagram,
-foto profissional (`public/images/danieli-drum.jpg`) e texto de apresentação.
+Procure por `PENDENTE` no código: texto de apresentação, formação e experiência.
 O WhatsApp aparece em `src/content/site.ts`, `src/components/hero/Hero.tsx` e `src/components/sections-b/data.ts`.

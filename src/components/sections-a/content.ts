@@ -7,9 +7,6 @@
  * sem promessa de resultado, sem preços e sem comparações.
  */
 
-/** Monograma oficial (arquivo da identidade visual; nunca redesenhar). */
-export const MONOGRAM_SRC = "/brand/monograma-transparente.png";
-
 export type Pendable = { text: string; pending?: boolean };
 
 export const about = {
@@ -20,10 +17,6 @@ export const about = {
     pending: true,
     text: "PENDENTE: texto de apresentação da Dra. Danieli Drum, a ser enviado por ela.",
   } satisfies Pendable,
-  photo: {
-    src: "/images/danieli-drum.jpg",
-    alt: "Retrato profissional da advogada Danieli Drum",
-  },
   oab: { pending: false, text: "OAB/MS 24680" } satisfies Pendable,
   pillars: [
     {
