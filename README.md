@@ -9,7 +9,7 @@ Next.js 16, React 19, TypeScript, TailwindCSS 4, Framer Motion, GSAP e React Thr
 npm install
 npm run dev                      # http://localhost:3000
 npm run build && npm start       # produção
-STATIC_EXPORT=1 npm run build    # site estático em /out
+npm run build    # site estático em /out (Cloudflare Pages: comando npm run build, pasta out)
 ```
 
 ## Estrutura
