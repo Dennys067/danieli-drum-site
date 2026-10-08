@@ -107,12 +107,13 @@ function Scale({ density, reduced }: { density: number; reduced: boolean }) {
 
     // Flutuação lenta + rotação contínua guiada pelo scroll
     root.current.position.y = Math.sin(t * 0.55) * 0.08 * motion;
-    root.current.rotation.y = (-0.35 + t * 0.04 * motion + s.scroll * Math.PI * 2.4 * motion) + s.x * 0.35;
+    root.current.rotation.y = (-0.35 + t * 0.04 * motion + s.scroll * Math.PI * 2.4 * motion) + s.x * 0.12;
     root.current.rotation.x = -s.y * 0.12 + 0.04;
-    root.current.position.x = s.x * 0.12;
+    // Mantém a balança sempre centralizada; o mouse só inclina levemente
+    root.current.position.x = 0;
 
     // O travessão oscila suavemente e os pratos permanecem na vertical
-    const tilt = (Math.sin(t * 0.45) * 0.05 + s.x * 0.05) * motion;
+    const tilt = Math.sin(t * 0.45) * 0.05 * motion;
     arm.current.rotation.z = tilt;
     panL.current.rotation.z = -tilt;
     panR.current.rotation.z = -tilt;
