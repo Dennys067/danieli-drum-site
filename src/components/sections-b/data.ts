@@ -89,7 +89,7 @@ export const processSteps: ProcessStep[] = [
       "Atualizações sobre cada andamento, para que você saiba em que ponto está o seu caso.",
   },
   {
-    title: "Resultado",
+    title: "Encerramento",
     description:
       "Ao final, a explicação do desfecho e a orientação sobre os próximos passos, quando houver.",
   },

@@ -23,7 +23,7 @@ export const messages = {
 export const nav = [
   { href: "#sobre", label: "Sobre" },
   { href: "#areas", label: "Atuação" },
-  { href: "#diferenciais", label: "Diferenciais" },
+  { href: "#diferenciais", label: "Princípios" },
   { href: "#como-funciona", label: "Atendimento" },
   { href: "#contato", label: "Contato" },
 ];

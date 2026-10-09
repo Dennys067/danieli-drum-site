@@ -88,7 +88,7 @@ export const practiceAreas = {
 export type DifferentialIcon = "person" | "eye" | "compass" | "clock" | "seal";
 
 export const differentials = {
-  eyebrow: "Diferenciais",
+  eyebrow: "Princípios",
   title: "Princípios do atendimento",
   lead: "A forma de conduzir cada caso se apoia em cinco compromissos.",
   items: [

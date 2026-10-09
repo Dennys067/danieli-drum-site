@@ -47,8 +47,8 @@ export default function FinalCta() {
           viewport={viewportOnce}
           className="mt-8 font-serif text-[1.85rem] font-light uppercase leading-[1.35] tracking-[0.14em] text-[#F4EEE2] md:text-[3.25rem]"
         >
-          Seu direito merece
-          <span className="block text-[#CFB686]">atenção especializada.</span>
+          Contato e
+          <span className="block text-[#CFB686]">agendamento.</span>
         </motion.h2>
         <motion.span
           aria-hidden
