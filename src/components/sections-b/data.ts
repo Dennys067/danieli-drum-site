@@ -29,6 +29,23 @@ export const whatsappUrl = contact.whatsappNumber
   ? `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
   : "#rodape";
 
+// Mensagem montada pelo formulário de pré-atendimento (CTA final). O valor da consulta
+// não aparece no site (Provimento OAB 205/2021, art. 3º, I): é informado na conversa privada.
+export function triageWhatsappUrl(data: { name: string; area: string; summary: string }) {
+  if (!contact.whatsappNumber) return "#rodape";
+  const text = [
+    `Olá, Dra. Danieli. Meu nome é ${data.name.trim()}.`,
+    `Assunto: ${data.area}.`,
+    data.summary.trim() ? `Resumo: ${data.summary.trim()}` : null,
+    "Gostaria de informações sobre a consulta e de agendar um atendimento.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(text)}`;
+}
+
+export const triageAreas = ["Direito Previdenciário", "Direito Cível", "Outro assunto"];
+
 export const instagramUrl = contact.instagramHandle
   ? `https://instagram.com/${contact.instagramHandle.replace(/^@/, "")}`
   : null;

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { nav, site, whatsappLink, messages } from "@/content/site";
+import { nav, site } from "@/content/site";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,9 +50,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href={whatsappLink(messages.schedule)}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contato"
             className="rounded-[2px] border border-gold px-5 py-2.5 text-[11px] uppercase tracking-[0.24em] text-coffee transition-colors hover:bg-coffee hover:text-ivory-text"
           >
             Agendar
