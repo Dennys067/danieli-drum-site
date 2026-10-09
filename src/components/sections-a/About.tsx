@@ -30,6 +30,17 @@ export function About() {
               {about.oab.text}
             </p>
           </Reveal>
+
+          <Reveal delay={0.24} className="mt-14 lg:mt-20">
+            <figure className="border-l border-[#B89B67] pl-8">
+              <figcaption className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#A08350]">
+                {about.humanized.title}
+              </figcaption>
+              <blockquote className="mt-4 font-serif text-xl font-light italic leading-relaxed text-[#3A2B24] sm:text-[1.6rem]">
+                {about.humanized.text}
+              </blockquote>
+            </figure>
+          </Reveal>
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7 lg:pt-4">
@@ -63,16 +74,6 @@ export function About() {
             ))}
           </dl>
 
-          <Reveal delay={0.1} className="mt-14">
-            <figure className="border-l border-[#B89B67] pl-8">
-              <figcaption className="font-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#A08350]">
-                {about.humanized.title}
-              </figcaption>
-              <blockquote className="mt-4 font-serif text-xl font-light italic leading-relaxed text-[#3A2B24] sm:text-2xl">
-                {about.humanized.text}
-              </blockquote>
-            </figure>
-          </Reveal>
         </div>
       </div>
     </section>
