@@ -1,0 +1,7 @@
+{
+  // Robô do WhatsApp: Worker separado do site.
+  "name": "danieli-drum-whatsapp",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true }
+}
