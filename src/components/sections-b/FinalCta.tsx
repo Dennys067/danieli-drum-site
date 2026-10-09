@@ -12,7 +12,7 @@ const labelClass = "block font-sans text-[10px] uppercase tracking-[0.3em] text-
 
 export default function FinalCta() {
   const [name, setName] = useState("");
-  const [area, setArea] = useState(triageAreas[0]);
+  const [area, setArea] = useState("");
   const [summary, setSummary] = useState("");
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -94,13 +94,19 @@ export default function FinalCta() {
           <label className="sm:col-span-1">
             <span className={labelClass}>Assunto</span>
             <select
+              required
               name="assunto"
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className={`${fieldClass} cursor-pointer [&>option]:bg-[#30231D]`}
+              className={`${fieldClass} cursor-pointer [&>option]:bg-[#30231D] ${area ? "" : "text-[#F4EEE2]/40"}`}
             >
+              <option value="" disabled>
+                Selecionar
+              </option>
               {triageAreas.map((a) => (
-                <option key={a}>{a}</option>
+                <option key={a} className="text-[#F4EEE2]">
+                  {a}
+                </option>
               ))}
             </select>
           </label>
