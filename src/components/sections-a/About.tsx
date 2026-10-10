@@ -7,7 +7,7 @@ export function About() {
   return (
     <section id="sobre" aria-labelledby="sobre-title" className="relative bg-transparent py-28 sm:py-40">
       <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-10 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
+        <div className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
           <Reveal>
             <Eyebrow>{about.eyebrow}</Eyebrow>
           </Reveal>
@@ -45,18 +45,20 @@ export function About() {
 
         <div className="lg:col-span-6 lg:col-start-7 lg:pt-4">
           <Reveal>
-            {about.presentation.pending ? (
-              <PendingText>{about.presentation.text}</PendingText>
-            ) : (
-              <p className="font-sans text-base font-light leading-relaxed text-[#3A2B24]/80 sm:text-lg">
-                {about.presentation.text}
-              </p>
-            )}
+            <div className="space-y-5 font-sans text-base font-light leading-relaxed text-[#3A2B24]/80 sm:text-lg">
+              {about.presentation.map((paragraph) => (
+                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              ))}
+            </div>
           </Reveal>
 
           <dl className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2">
             {about.pillars.map((pillar, i) => (
-              <Reveal key={pillar.title} delay={0.08 * i} className="border-t border-[#B89B67]/50 pt-6">
+              <Reveal
+                key={pillar.title}
+                delay={0.08 * i}
+                className={`border-t border-[#B89B67]/50 pt-6 ${i === 0 ? "sm:col-span-2" : ""}`}
+              >
                 <dt className="flex items-baseline gap-3 font-serif text-lg font-normal uppercase tracking-[0.14em] text-[#3A2B24]">
                   <span className="font-sans text-[0.62rem] tracking-[0.2em] text-[#A08350]">
                     {String(i + 1).padStart(2, "0")}

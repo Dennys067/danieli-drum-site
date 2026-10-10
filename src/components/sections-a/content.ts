@@ -1,8 +1,7 @@
 /**
- * Conteúdo das seções Sobre, Áreas de Atuação e Diferenciais.
+ * Conteúdo das seções Sobre, Áreas de Atuação e Princípios.
  *
- * Itens com `pending: true` (ou textos que começam com "PENDENTE") ainda
- * dependem de dados da Dra. Danieli Drum e aparecem marcados no site.
+ * Itens com `pending: true` aparecem marcados como pendentes no site.
  * Os textos seguem as regras de publicidade da OAB: tom informativo,
  * sem promessa de resultado, sem preços e sem comparações.
  */
@@ -13,21 +12,16 @@ export const about = {
   eyebrow: "Sobre",
   title: "Danieli Drum",
   subtitle: "Advocacia e Consultoria Jurídica",
-  presentation: {
-    pending: true,
-    text: "PENDENTE: texto de apresentação da Dra. Danieli Drum, a ser enviado por ela.",
-  } satisfies Pendable,
+  presentation: [
+    "Como advogada, acredito que buscar orientação jurídica deve ser uma experiência acolhedora, clara e segura. Por isso, procuro estar próxima de cada cliente, ouvindo sua história com atenção e compreendendo, de forma cuidadosa, as necessidades e particularidades de cada caso.",
+    "Sei que, muitas vezes, lidar com uma questão jurídica pode gerar dúvidas, insegurança e preocupação. Por isso, faço questão de explicar cada etapa de maneira simples e objetiva, apresentando os caminhos possíveis e ajudando você a tomar decisões conscientes.",
+    "Mais do que aplicar a lei, acredito que a advocacia também envolve escuta, respeito e cuidado com as pessoas. Estou aqui para oferecer orientação jurídica com proximidade, clareza e compromisso, buscando a melhor solução para cada situação.",
+  ],
   oab: { pending: false, text: "OAB/MS 24680" } satisfies Pendable,
   pillars: [
     {
       title: "Formação",
-      pending: true,
-      text: "PENDENTE: graduação, pós-graduações e cursos de atualização.",
-    },
-    {
-      title: "Experiência",
-      pending: true,
-      text: "PENDENTE: trajetória profissional e tempo de atuação.",
+      text: "Direito pelo Centro Universitário da Grande Dourados (UNIGRAN), janeiro de 2019.",
     },
     {
       title: "Missão",
