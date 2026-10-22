@@ -122,6 +122,9 @@ export default function Footer() {
           © {year} Danieli Drum · {contact.oab ?? `OAB ${PENDING_LABEL.toLowerCase()}`}
         </p>
         <p>Conteúdo de caráter exclusivamente informativo</p>
+        <a href="/privacidade" className="transition-colors duration-300 hover:text-[#CFB686]">
+          Política de Privacidade
+        </a>
         <p className="text-[#F4EEE2]/40">
           Desenvolvido por <span className="text-[#CFB686]/70">AS Websites</span>
         </p>
