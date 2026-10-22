@@ -7,6 +7,10 @@
 //   PHONE_NUMBER_ID  identificação do número de telefone (painel da Meta)
 //   VERIFY_TOKEN     senha escolhida por você para validar o webhook
 //   APP_SECRET       chave secreta do app da Meta (opcional, recomendado)
+//
+// Pela Telnyx (parceira da Meta, permite manter o número no app WhatsApp Business):
+//   TELNYX_API_KEY     chave de API da Telnyx
+//   TELNYX_PUBLIC_KEY  chave pública da Telnyx para conferir os webhooks (opcional, recomendado)
 
 const KEYWORD = "informacoes sobre a consulta";
 
@@ -59,6 +63,50 @@ async function sendText(env, to, body) {
   if (retry && result.includes("131030")) await postMessage(env, retry, body);
 }
 
+// Webhooks da Telnyx são assinados com Ed25519 sobre "timestamp|corpo".
+async function validTelnyxSignature(request, body, publicKey) {
+  if (!publicKey) return true;
+  const signature = request.headers.get("telnyx-signature-ed25519");
+  const timestamp = request.headers.get("telnyx-timestamp");
+  if (!signature || !timestamp) return false;
+  // Recusa avisos com mais de 5 minutos, para evitar reenvio de mensagens antigas.
+  if (Math.abs(Date.now() / 1000 - Number(timestamp)) > 300) return false;
+  const bytes = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+  try {
+    const key = await crypto.subtle.importKey("raw", bytes(publicKey), { name: "Ed25519" }, false, ["verify"]);
+    return await crypto.subtle.verify("Ed25519", key, bytes(signature), new TextEncoder().encode(`${timestamp}|${body}`));
+  } catch {
+    return false;
+  }
+}
+
+async function sendTelnyxText(env, from, to, body) {
+  const res = await fetch("https://api.telnyx.com/v2/messages/whatsapp", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${env.TELNYX_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from, to, whatsapp_message: { type: "text", text: { body } } }),
+  });
+  console.log(res.ok ? "Resposta enviada (Telnyx)" : "Erro ao enviar (Telnyx)", res.status, await res.text());
+}
+
+async function handleTelnyx(request, env, ctx, body, event) {
+  if (!(await validTelnyxSignature(request, body, env.TELNYX_PUBLIC_KEY))) {
+    return new Response("Assinatura inválida", { status: 401 });
+  }
+  const payload = event.payload || {};
+  console.log("Aviso da Telnyx", event.event_type, JSON.stringify(payload.errors || []));
+  // Só mensagens recebidas de clientes; ignora as que a própria Dra. envia pelo app (message.echo).
+  if (event.event_type !== "message.received" || payload.direction !== "inbound") return new Response("ok");
+  const text = payload.body?.type === "text" ? payload.body.text?.body || "" : "";
+  console.log("Mensagem recebida", payload.body?.type, normalize(text).includes(KEYWORD) ? "com a frase-chave" : "sem a frase-chave");
+  if (normalize(text).includes(KEYWORD)) {
+    const business = typeof payload.to === "string" ? payload.to : payload.to?.[0]?.phone_number;
+    const customer = payload.from?.phone_number || payload.body?.from_user_id;
+    ctx.waitUntil(sendTelnyxText(env, business, customer, REPLY));
+  }
+  return new Response("ok");
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -76,6 +124,12 @@ export default {
     if (request.method !== "POST") return new Response("Método não permitido", { status: 405 });
 
     const body = await request.text();
+    let telnyxEvent;
+    try {
+      telnyxEvent = JSON.parse(body).data;
+    } catch {}
+    if (telnyxEvent?.event_type) return handleTelnyx(request, env, ctx, body, telnyxEvent);
+
     if (!(await validSignature(request, body, env.APP_SECRET))) {
       return new Response("Assinatura inválida", { status: 401 });
     }
