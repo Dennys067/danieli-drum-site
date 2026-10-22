@@ -36,15 +36,27 @@ async function validSignature(request, body, secret) {
   return header === `sha256=${hex}`;
 }
 
-async function sendText(env, to, body) {
+async function postMessage(env, to, body) {
   const version = env.GRAPH_VERSION || "v23.0";
   const res = await fetch(`https://graph.facebook.com/${version}/${env.PHONE_NUMBER_ID}/messages`, {
     method: "POST",
     headers: { Authorization: `Bearer ${env.WHATSAPP_TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify({ messaging_product: "whatsapp", to, type: "text", text: { body } }),
   });
+  const result = await res.text();
   // Registra o resultado de todo envio (sem dados sensíveis) para facilitar o diagnóstico.
-  console.log(res.ok ? "Resposta enviada" : "Erro ao enviar", res.status, await res.text());
+  console.log(res.ok ? "Resposta enviada" : "Erro ao enviar", res.status, result);
+  return result;
+}
+
+// Celulares do Brasil chegam da Meta sem o 9 extra (55 + DDD + 8 dígitos). Se a Meta recusar
+// o número nesse formato, tenta de novo com o 9 depois do DDD.
+const withNinthDigit = (to) => (/^55\d{2}[6-9]\d{7}$/.test(to) ? `${to.slice(0, 4)}9${to.slice(4)}` : null);
+
+async function sendText(env, to, body) {
+  const result = await postMessage(env, to, body);
+  const retry = withNinthDigit(to);
+  if (retry && result.includes("131030")) await postMessage(env, retry, body);
 }
 
 export default {
