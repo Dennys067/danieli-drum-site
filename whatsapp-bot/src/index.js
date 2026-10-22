@@ -90,6 +90,10 @@ export default {
     const tasks = [];
     for (const entry of payload.entry || []) {
       for (const change of entry.changes || []) {
+        // Avisos de entrega da Meta (enviada, entregue, lida ou falhou, com o motivo da falha).
+        for (const status of change.value?.statuses || []) {
+          console.log("Status da entrega", status.status, JSON.stringify(status.errors || []));
+        }
         for (const message of change.value?.messages || []) {
           const text = message.type === "text" ? message.text?.body || "" : "";
           console.log("Mensagem recebida", message.type, normalize(text).includes(KEYWORD) ? "com a frase-chave" : "sem a frase-chave");
