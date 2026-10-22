@@ -43,7 +43,8 @@ async function sendText(env, to, body) {
     headers: { Authorization: `Bearer ${env.WHATSAPP_TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify({ messaging_product: "whatsapp", to, type: "text", text: { body } }),
   });
-  if (!res.ok) console.log("Erro ao enviar", res.status, await res.text());
+  // Registra o resultado de todo envio (sem dados sensíveis) para facilitar o diagnóstico.
+  console.log(res.ok ? "Resposta enviada" : "Erro ao enviar", res.status, await res.text());
 }
 
 export default {
@@ -79,6 +80,7 @@ export default {
       for (const change of entry.changes || []) {
         for (const message of change.value?.messages || []) {
           const text = message.type === "text" ? message.text?.body || "" : "";
+          console.log("Mensagem recebida", message.type, normalize(text).includes(KEYWORD) ? "com a frase-chave" : "sem a frase-chave");
           if (normalize(text).includes(KEYWORD)) tasks.push(sendText(env, message.from, REPLY));
         }
       }
