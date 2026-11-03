@@ -8,7 +8,7 @@ export const site = {
   tagline: "Advocacia e Consultoria Jurídica",
   areas: "Direito Previdenciário e Direito Cível",
   whatsapp: "556799549879",
-  // [PENDENTE] domínio definitivo
+  city: "Glória de Dourados/MS",
   url: "https://www.danielidrum.adv.br",
 };
 
